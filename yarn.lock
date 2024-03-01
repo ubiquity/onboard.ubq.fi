@@ -3616,6 +3616,18 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
+libsodium-wrappers@^0.7.13:
+  version "0.7.13"
+  resolved "https://registry.yarnpkg.com/libsodium-wrappers/-/libsodium-wrappers-0.7.13.tgz#83299e06ee1466057ba0e64e532777d2929b90d3"
+  integrity sha512-kasvDsEi/r1fMzKouIDv7B8I6vNmknXwGiYodErGuESoFTohGSKZplFtVxZqHaoQ217AynyIFgnOVRitpHs0Qw==
+  dependencies:
+    libsodium "^0.7.13"
+
+libsodium@^0.7.13:
+  version "0.7.13"
+  resolved "https://registry.yarnpkg.com/libsodium/-/libsodium-0.7.13.tgz#230712ec0b7447c57b39489c48a4af01985fb393"
+  integrity sha512-mK8ju0fnrKXXfleL53vtp9xiPq5hKM0zbDQtcxQIsSmxNgSxqCj6R7Hl9PkrNe2j29T4yoDaF7DJLK9/i5iWUw==
+
 lilconfig@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-3.0.0.tgz#f8067feb033b5b74dab4602a5f5029420be749bc"
