@@ -17,7 +17,8 @@
     "format:cspell": "cspell **/*",
     "knip": "knip",
     "knip-ci": "knip --no-exit-code --reporter json",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "git submodule update --init --recursive"
   },
   "keywords": [
     "typescript",
