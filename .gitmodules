@@ -1,0 +1,4 @@
+[submodule "lib/ubiquibot"]
+	path = lib/ubiquibot
+	url = https://github.com/ubiquity/ubiquibot
+	branch = development

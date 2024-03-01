@@ -1,10 +1,8 @@
+// @ts-expect-error - Could not find a declaration file for module
 import esbuild from "esbuild";
-const typescriptEntries = ["static/main.ts"];
-// const cssEntries = ["static/style.css"];
-const entries = [
-  ...typescriptEntries,
-  //  ...cssEntries
-];
+const typescriptEntries = ["static/scripts/onboarding/onboarding.ts"];
+const cssEntries = ["static/styles/rewards/rewards.css", "static/styles/audit-report/audit.css", "static/styles/onboarding/onboarding.css"];
+export const entries = [...typescriptEntries, ...cssEntries];
 
 export const esBuildContext: esbuild.BuildOptions = {
   sourcemap: true,
@@ -19,7 +17,7 @@ export const esBuildContext: esbuild.BuildOptions = {
     ".ttf": "dataurl",
     ".svg": "dataurl",
   },
-  outdir: "static/dist",
+  outdir: "static/out",
 };
 
 esbuild
