@@ -63,23 +63,6 @@ export function stringifyYAML(value: BotConfig): string {
   return YAML.stringify(value, { defaultKeyType: "PLAIN", defaultStringType: "QUOTE_DOUBLE", lineWidth: 0 });
 }
 
-export async function getConf(): Promise<string | undefined> {
-  try {
-    const octokit = new Octokit({ auth: githubPAT.value });
-    const { data } = await octokit.rest.repos.getContent({
-      owner: orgName.value,
-      repo: REPO_NAME,
-      path: KEY_PATH,
-      mediaType: {
-        format: "raw",
-      },
-    });
-    return data as unknown as string;
-  } catch (error: unknown) {
-    return undefined;
-  }
-}
-
 function getTextBox(text: string) {
   const strLen = text.split("\n").length * 22;
   return `${strLen > 140 ? strLen : 140}px`;
@@ -216,17 +199,14 @@ async function handleInstall(
       });
     }
 
-    const conf = await getConf();
-
     const updatedConf = defaultConf;
-    const parsedConf = await parseYAML<BotConfig>(conf);
     updatedConf.keys[PRIVATE_ENCRYPTED_KEY_NAME] = encryptedValue;
     updatedConf.payments[EVM_NETWORK_KEY_NAME] = Number(chainIdSelect.value);
 
     // combine configs (default + remote org wide)
-    const combinedConf = Object.assign(updatedConf, parsedConf);
+    const combinedConf = Object.assign(updatedConf, defaultConf);
 
-    const stringified = stringifyYAML(combinedConf);
+    const stringified = btoa(stringifyYAML(combinedConf));
     outKey.value = stringified;
     const { status } = await octokit.repos.createOrUpdateFileContents({
       owner: orgName.value,
