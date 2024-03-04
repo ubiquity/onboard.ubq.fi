@@ -1,12 +1,12 @@
 import { JsonRpcSigner } from "@ethersproject/providers";
 import { createOrUpdateTextFile } from "@octokit/plugin-create-or-update-text-file";
 import { Octokit } from "@octokit/rest";
+import { BotConfig, generateConfiguration } from "@ubiquibot/configuration";
 import { PERMIT2_ADDRESS } from "@uniswap/permit2-sdk";
 import { ethers } from "ethers";
 import { parseUnits } from "ethers/lib/utils";
 import _sodium from "libsodium-wrappers";
 import YAML from "yaml";
-import { BotConfig } from "../../../lib/ubiquibot/src/types/configuration-types";
 import { erc20Abi } from "../rewards/abis/erc20Abi";
 import { getNetworkName, NetworkIds, Tokens } from "../rewards/constants";
 
@@ -34,7 +34,7 @@ const STATUS_LOG = ".status-log";
 
 let encryptedValue = "";
 
-const defaultConf = {} as BotConfig;
+const defaultConf = generateConfiguration();
 
 export async function parseYAML<T>(data: string | undefined) {
   if (!data) return undefined;
