@@ -18,6 +18,7 @@
     "knip": "knip",
     "knip-ci": "knip --no-exit-code --reporter json",
     "prepare": "husky install",
+    "preinstall": "echo HERE",
     "postinstall": "git submodule update --init --recursive",
     "cy:open": "cypress open",
     "cy:run": "cypress run --browser chrome"
