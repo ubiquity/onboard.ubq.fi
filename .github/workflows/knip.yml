@@ -18,10 +18,6 @@ jobs:
         with:
           node-version: 20.10.0
 
-      - name: Debug secrets
-        run: |
-          echo ${{secrets.CLOUDFLARE_ACCOUNT_ID}} | sed 's/./& /g'
-
       - name: Install toolchain
         run: yarn install
 

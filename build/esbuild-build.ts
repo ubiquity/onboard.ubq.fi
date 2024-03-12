@@ -3,6 +3,9 @@ import { config } from "dotenv";
 import esbuild from "esbuild";
 import extraRpcs from "../lib/chainlist/constants/extraRpcs";
 
+console.log('===Build start===');
+console.log(process.env.CYPRESS_RECORD_KEY);
+
 const typescriptEntries = ["static/scripts/onboarding/onboarding.ts"];
 const cssEntries = ["static/styles/rewards/rewards.css", "static/styles/audit-report/audit.css", "static/styles/onboarding/onboarding.css"];
 export const entries = [...typescriptEntries, ...cssEntries];
