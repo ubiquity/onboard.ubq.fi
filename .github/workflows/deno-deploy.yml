@@ -60,6 +60,9 @@ jobs:
           mapfile -t ignored_paths < <(git ls-files -o --ignored --exclude-standard --directory --no-empty-directory)
           excludes=()
           for path in "${ignored_paths[@]}"; do
+            case "$path" in
+              static/dist|static/dist/*) continue ;;
+            esac
             excludes+=("--exclude=${path}")
           done
 
@@ -70,6 +73,7 @@ jobs:
             --root="." \
             --token="$DENO_DEPLOY_TOKEN" \
             --include="." \
+            --include="static/dist/**" \
             --include="deno.json" \
             "${excludes[@]}" \
             --env-var="SUPABASE_URL=${SUPABASE_URL}" \
