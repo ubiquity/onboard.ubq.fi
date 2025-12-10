@@ -14,6 +14,10 @@ jobs:
       deno_version: 2.x
       install_command: bun install
       build_command: bun run build
+      build_env: |
+        SUPABASE_URL=${{ secrets.SUPABASE_URL }}
+        SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
+        FRONTEND_URL=https://onboard.ubq.fi
       include: |
         static/dist/**
     secrets:
