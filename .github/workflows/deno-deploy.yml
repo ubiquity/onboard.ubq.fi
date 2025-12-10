@@ -19,7 +19,7 @@ jobs:
         SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY
         FRONTEND_URL=https://onboard.ubq.fi
       runtime_env: |
-        STATIC_DIR=static/dist
+        STATIC_DIR=static
       include: |
         static/**
     secrets:
