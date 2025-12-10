@@ -21,6 +21,6 @@ jobs:
       runtime_env: |
         STATIC_DIR=static/dist
       include: |
-        static/dist/**
+        static/**
     secrets:
       DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
