@@ -395,6 +395,9 @@
   .toolbar.ready {
     opacity: 1;
   }
+  #branding > svg > path {
+    fill: #fff;
+  }
   #branding {
     font-weight: 400;
     text-rendering: geometricPrecision;
