@@ -39,7 +39,7 @@
   #logo {
     height: 28px;
     width: 24.469px;
-    margin-right: 6px;
+    margin-right: 3px;
     object-fit: contain;
     vertical-align: middle;
     fill: #fff;
@@ -394,6 +394,9 @@
   }
   .toolbar.ready {
     opacity: 1;
+  }
+  #branding > svg > path {
+    fill: #fff;
   }
   #branding {
     font-weight: 400;
