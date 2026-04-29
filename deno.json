@@ -1,5 +1,10 @@
 {
   "tasks": {
+    "build": "deno run -A build/esbuild-build.ts",
     "serve": "deno run --allow-read --allow-net --allow-env serve.ts"
+  },
+  "deploy": {
+    "org": "ubiquity-dao",
+    "app": "p-onboard-ubq-fi"
   }
 }
