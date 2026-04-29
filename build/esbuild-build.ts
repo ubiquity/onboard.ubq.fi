@@ -1,13 +1,15 @@
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
+import { createRequire } from "node:module";
 import { config } from "dotenv";
 import esbuild from "esbuild";
-import { yamlPlugin } from "esbuild-plugin-yaml";
-import { access, mkdir } from "fs/promises";
-import { join } from "path";
-import { invertColors } from "./plugins/invert-colors";
+import yamlPluginPackage from "esbuild-plugin-yaml";
+import { access, mkdir } from "node:fs/promises";
+import { join } from "node:path";
+import { invertColors } from "./plugins/invert-colors.ts";
 
 // Ensure output directory exists
 const outDir = join("static/dist");
+const require = createRequire(import.meta.url);
 
 async function ensureOutDir() {
   try {
@@ -18,13 +20,24 @@ async function ensureOutDir() {
   }
 }
 
-import { pwaManifest } from "./plugins/pwa-manifest";
+import { pwaManifest } from "./plugins/pwa-manifest.ts";
+const { yamlPlugin } = yamlPluginPackage as typeof import("esbuild-plugin-yaml");
 const typescriptEntries = ["static/scripts/onboarding/onboarding.ts"];
 const cssEntries = ["static/style/style.css", "static/style/special.css"];
 export const entries = [...typescriptEntries, ...cssEntries];
 
+const commonJsBrowserPackages: esbuild.Plugin = {
+  name: "common-js-browser-packages",
+  setup(build) {
+    // Deno's npm layout exposes a broken ESM sibling import in libsodium-wrappers.
+    build.onResolve({ filter: /^libsodium-wrappers$/ }, () => ({
+      path: require.resolve("libsodium-wrappers"),
+    }));
+  },
+};
+
 export const esBuildContext: esbuild.BuildOptions = {
-  plugins: [invertColors, pwaManifest, yamlPlugin({})],
+  plugins: [commonJsBrowserPackages, invertColors, pwaManifest, yamlPlugin({})],
   sourcemap: true,
   entryPoints: entries,
   bundle: true,
