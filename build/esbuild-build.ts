@@ -54,9 +54,24 @@ export const esBuildContext: esbuild.BuildOptions = {
   outbase: "static",
   absWorkingDir: process.cwd(),
   define: createEnvDefines(["SUPABASE_URL", "SUPABASE_ANON_KEY", "FRONTEND_URL"], {
-    commitHash: execSync(`git rev-parse --short HEAD`).toString().trim(),
+    commitHash: getCommitHash(),
   }),
 };
+
+function getCommitHash(): string {
+  const ciSha = process.env.GITHUB_SHA;
+  if (ciSha) return ciSha.slice(0, 7);
+
+  try {
+    return execSync("git rev-parse --short HEAD", {
+      stdio: ["ignore", "pipe", "ignore"],
+    })
+      .toString()
+      .trim();
+  } catch {
+    return "unknown";
+  }
+}
 
 async function build() {
   // Create output directory before building
