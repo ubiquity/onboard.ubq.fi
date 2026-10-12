@@ -38,3 +38,10 @@ yarn cy:run
 
 To test in a real-world scenario, you will need to create an Organization under your GitHub account, and use it as a
 dummy. If the operation is successful, you will see a new repository appear with the Ubiquibot configuration.
+
+## Hosting (2026-10-12)
+
+Served by the Cloudflare Workers static-assets worker `onboard-ubq-fi`
+(`wrangler.toml`), routed at `onboard.ubq.fi/*`. The build needs the shared
+Supabase values (`SUPABASE_URL`, `SUPABASE_ANON_KEY`, `FRONTEND_URL` ).
+Deno Deploy is no longer used (shutdown April 2027).
